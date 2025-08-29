@@ -1,0 +1,15 @@
+{
+  "name": "netbox-ipam-ptr-zonefile",
+  "version": "1.0.0",
+  "description": "Sync IPAM rDNS to BIND zonefile PTR records",
+  "repository": "https://github.com/spaugur/netbox-ipam-ptr-zonefile",
+  "main": "generate.js",
+  "author": "Kría <kria@spaugurdata.com>",
+  "license": "MIT",
+  "packageManager": "pnpm@10.10.0",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "ip-cidr": "^4.0.2",
+    "ip-num": "^1.5.2"
+  }
+}
