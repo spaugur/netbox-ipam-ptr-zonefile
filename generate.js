@@ -77,7 +77,7 @@ const main = async () => {
                 .split(".")
                 .toReversed()
                 .slice(1)
-                .join("-")}.in-addr.arpa`;
+                .join(".")}.in-addr.arpa`;
         }
 
         const ptr_prefix = prefix.custom_fields.ptr_prefix;
