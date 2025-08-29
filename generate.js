@@ -182,7 +182,7 @@ const main = async () => {
                     .replaceAll(":", "")
                     .split("")
                     .toReversed()
-                    .join(".")}.ip6.arpa`;
+                    .join(".")}.ip6.arpa.`;
 
                 let ptr_value;
                 if (ptr.endsWith(".")) {
@@ -206,7 +206,7 @@ const main = async () => {
                     ptr_value = `${ptr}.`;
                 }
 
-                const record_host = `${oct3}.${oct2}.${oct1}.${oct0}.in-addr.arpa`;
+                const record_host = `${oct3}.${oct2}.${oct1}.${oct0}.in-addr.arpa.`;
 
                 ptr_records += `${record_host} IN PTR ${ptr_value}\n`;
             }
