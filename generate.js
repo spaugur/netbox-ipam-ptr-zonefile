@@ -173,6 +173,11 @@ const main = async () => {
         }
     }
 
+    const default_template = read_file_sync(
+        join_path(__dirname, "zone-template.tpl"),
+        { encoding: "utf8" }
+    );
+
     for (const [zone, { AF_VERSION, ...records }] of Object.entries(datagrid)) {
         let ptr_records = ``;
 
@@ -212,12 +217,18 @@ const main = async () => {
             }
         }
 
-        const result_db = read_file_sync(
-            join_path(__dirname, "zone-template.tpl"),
-            {
-                encoding: "utf8",
-            }
-        )
+        let template;
+        try {
+            template = read_file_sync(join_path(__dirname, `${zone}.tpl`), { encoding: 'utf8' })
+        } catch {
+            // do nothing, template is undefined
+        }
+
+        if (!template) {
+            template = default_template;
+        }
+
+        const result_db = template
             .replaceAll("{{ PTR_RECORDS }}", ptr_records)
             .replaceAll("{{ ZONE }}", zone);
 
