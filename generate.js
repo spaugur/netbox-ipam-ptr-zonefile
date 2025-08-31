@@ -155,6 +155,11 @@ const main = async () => {
         }
 
         for (const address of addresses_json.results) {
+            // do not let empty dns names replace autoPTRs
+            if (!address.dns_name || address.dns_name.replace(/ /g, '') === "") {
+                continue;
+            }
+
             const ip_cidr = new IP_CIDR(address.address);
 
             // prevent IPv4 'network' addresses from obtaining an auto-ptr.
