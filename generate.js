@@ -228,17 +228,24 @@ const main = async () => {
             template = default_template;
         }
 
+        const now = new Date();
+        const yyyy = now.getUTCFullYear();
+        const mm = now.getUTCMonth().toString().padStart(2, '0');
+        const dd = now.getUTCDate().toString().padStart(2, '0');
+        const serial_yyyymmddxx = `${yyyy}${mm}${dd}01`;
+
         const result_db = template
             .replaceAll("{{ PTR_RECORDS }}", ptr_records)
-            .replaceAll("{{ ZONE }}", zone);
+            .replaceAll("{{ ZONE }}", zone)
+            .replaceAll("{{ SERIAL }}", serial_yyyymmddxx);
 
         write_file_sync(join_path(process.env.OUT_DIRECTORY, `db.${zone}`), result_db);
     }
 
     if (process.env.RELOAD_DNS_SERVER_CMD) {
         try {
-        run_bash(process.env.RELOAD_DNS_SERVER_CMD);
-        } catch(e) {
+            run_bash(process.env.RELOAD_DNS_SERVER_CMD);
+        } catch (e) {
             console.error('Error while running DNS server reload CMD:', e);
 
             return process.exit(100);
