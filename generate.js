@@ -237,7 +237,9 @@ const main = async () => {
         const yyyy = now.getUTCFullYear();
         const mm = now.getUTCMonth().toString().padStart(2, '0');
         const dd = now.getUTCDate().toString().padStart(2, '0');
-        const serial_yyyymmddxx = `${yyyy}${mm}${dd}01`;
+        // divide the day into 15 minute increments, roughly every 15 minutes the serial increments by 1
+        const xx = Math.floor((now.getHours() * 60) / 15);
+        const serial_yyyymmddxx = `${yyyy}${mm}${dd}${xx}`;
 
         const result_db = template
             .replaceAll("{{ PTR_RECORDS }}", ptr_records)
